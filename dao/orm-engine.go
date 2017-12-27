@@ -2,6 +2,8 @@ package dao
 
 import (
 	"database/sql"
+	"errors"
+	"reflect"
 
 	"github.com/CODEJY/ORMEngine/sqlt"
 
@@ -40,4 +42,48 @@ func (e *ORMEngine) Insert(o interface{}) (int, error) {
 	}
 
 	return 1, nil
+}
+
+// query all the entries of the table
+func (e *ORMEngine) Find(o interface{}) error {
+	sliceValue := reflect.Indirect(reflect.ValueOf(o))
+	if sliceValue.Kind() != reflect.Slice {
+		return errors.New("needs a pointer to a slice")
+	}
+
+	sliceElementType := sliceValue.Type().Elem()
+	data := sliceElementType.Elem()
+	queryString, err := queryStmt(data.Name())
+	if err != nil {
+		return err
+	}
+
+	rows, err := e.Query(queryString)
+	if err != nil {
+		return err
+	}
+
+	columns, _ := rows.Columns()
+	count := len(columns)
+	values := make([]interface{}, count)
+	newSlice := reflect.MakeSlice(sliceValue.Type(), 0, 4)
+
+	for rows.Next() {
+		pv := reflect.New(data)
+		fieldArr := pv.Elem()
+
+		for i := 0; i < fieldArr.NumField(); i++ {
+			f := fieldArr.Field(i)
+			values[i] = f.Addr().Interface()
+		}
+
+		rows.Scan(values...)
+
+		newSlice = reflect.Append(newSlice, pv)
+	}
+
+	s := reflect.ValueOf(o).Elem()
+	s.Set(newSlice)
+
+	return nil
 }

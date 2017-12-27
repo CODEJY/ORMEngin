@@ -56,3 +56,12 @@ func getTableField(o interface{}) ([]string, []interface{}, error) {
 
 	return fieldNames, fieldValues, nil
 }
+
+// generate query statement
+func queryStmt(tableName string) (string, error) {
+	if tableName == "" {
+		return "", errors.New("non-exist interface type")
+	}
+
+	return "SELECT * FROM " + strings.ToLower(tableName), nil
+}
