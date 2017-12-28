@@ -11,11 +11,12 @@ ORM反射
 
 测试
 ---
-1. 首先创建数据库UserDB以及数据表userinfo
-
-2. 查看userinfo表的信息
-
+1. 首先创建数据库UserDB以及数据表userinfo  
+![](https://github.com/CODEJY/ORMEngine/blob/master/ScreenShot/create%20database.png)
+2. 查看userinfo表的信息  
+![](https://github.com/CODEJY/ORMEngine/blob/master/ScreenShot/before.png)
 3. 运行程序
-命令行输出：
-查看userinfo表是否写入成功：
-
+命令行输出：  
+![](https://github.com/CODEJY/ORMEngine/blob/master/ScreenShot/cmd.png)
+查看userinfo表是否写入成功：  
+![](https://github.com/CODEJY/ORMEngine/blob/master/ScreenShot/after.png)
