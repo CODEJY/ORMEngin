@@ -15,8 +15,8 @@ ORM反射
 ![](https://github.com/CODEJY/ORMEngine/blob/master/ScreenShot/create%20database.png)
 2. 查看userinfo表的信息  
 ![](https://github.com/CODEJY/ORMEngine/blob/master/ScreenShot/before.png)
-3. 运行程序
-命令行输出：  
+3. 运行程序   
+命令行输出：  
 ![](https://github.com/CODEJY/ORMEngine/blob/master/ScreenShot/cmd.png)
 查看userinfo表是否写入成功：  
 ![](https://github.com/CODEJY/ORMEngine/blob/master/ScreenShot/after.png)
